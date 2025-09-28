@@ -1,5 +1,5 @@
 {
-  "name": "Microservices-Ecom",
+  "name": "microservices-ecommerce",
   "private": true,
   "scripts": {
     "build": "turbo run build",
