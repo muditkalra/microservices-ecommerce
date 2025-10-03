@@ -5,6 +5,7 @@ import { clerkMiddleware, getAuth, requireAuth } from "@clerk/express";
 import { shouldBeUser } from "./middleware/authMiddleware.js";
 import productRouter from "./routes/product.route.js";
 import categoryRouter from "./routes/category.route.js";
+import { consumer, producer } from "./utils/kafka.js";
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -45,5 +46,22 @@ app.listen(port, (err) => {
         console.log(err);
         process.exit(1);
     }
+    consumer.connect();
+    producer.connect();
     console.log("product-service running on: http://localhost:8000");
 })
+
+const start = async () => {
+    try {
+        Promise.all([await producer.connect(), await consumer.connect()]);
+        app.listen(port, () => {
+            console.log("product-service running on: http://localhost:8000");
+        });
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+
+    }
+}
+
+start();

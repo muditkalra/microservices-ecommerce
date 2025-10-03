@@ -3,6 +3,8 @@ import fastify from "fastify";
 import { shouldBeUser } from "./middleware/authMiddleware.js";
 import { connectOrderDB } from "@repo/order-db";
 import { orderRoute } from "./routes/order.js";
+import { consumer, producer } from "./utils/kafka.js";
+import { runKafkaSubscriptions } from "./utils/subscriptions.js";
 
 const app = fastify();
 
@@ -25,8 +27,13 @@ app.register(orderRoute);
 
 const start = async () => {
     try {
-        await connectOrderDB();
+        Promise.all([
+            await connectOrderDB(),
+            await producer.connect(),
+            await consumer.connect()
+        ])
         await app.listen({ port: 8001 });
+        runKafkaSubscriptions();
         console.log("order-service running on: http://localhost:8001");
     } catch (error) {
         console.log(error);

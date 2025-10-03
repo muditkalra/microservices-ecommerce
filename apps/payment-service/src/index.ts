@@ -4,6 +4,8 @@ import { Hono } from 'hono';
 import sessionRoute from './routes/session.route.js';
 import { cors } from "hono/cors";
 import webhookRoute from './routes/webhooks.route.js';
+import { consumer, producer } from './utils/kafka.js';
+import { runkafkaSubscriptions } from './utils/subscriptions.js';
 
 const app = new Hono()
 app.use('*', clerkMiddleware());
@@ -28,7 +30,9 @@ const start = async () => {
 			port: 8002
 		}, (info) => {
 			console.log(`payment-service is running on http://localhost:${info.port}`)
-		})
+		});
+		Promise.all([await producer.connect(), await consumer.connect()]);
+		await runkafkaSubscriptions();
 	} catch (error) {
 		console.log(error);
 		process.exit(1);
