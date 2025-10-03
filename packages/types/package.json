@@ -21,6 +21,7 @@
     "@types/node": "^24.6.0"
   },
   "dependencies": {
-    "@repo/product-db": "workspace:*"
+    "@repo/product-db": "workspace:*",
+    "@repo/order-db": "workspace:*"
   }
 }
