@@ -1,11 +1,16 @@
 {
-  "name": "order-service",
+  "name": "@repo/types",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
   "scripts": {
-    "dev": "tsx --env-file=.env --watch src/index.ts",
     "check-types": "tsc --noEmit"
   },
   "keywords": [],
@@ -13,14 +18,9 @@
   "license": "ISC",
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@repo/types": "workspace:*",
-    "@types/node": "^22.15.3",
-    "tsx": "^4.20.6",
-    "typescipt": "^1.0.0"
+    "@types/node": "^24.6.0"
   },
   "dependencies": {
-    "@clerk/fastify": "^2.4.34",
-    "fastify": "^5.6.1",
-    "@repo/order-db": "workspace:*"
+    "@repo/product-db": "workspace:*"
   }
 }

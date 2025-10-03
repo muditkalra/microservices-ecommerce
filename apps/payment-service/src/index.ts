@@ -1,10 +1,13 @@
-import { clerkMiddleware, getAuth } from '@hono/clerk-auth';
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
-import { shouldBeUser } from './middleware/authMiddleware.js';
+import { clerkMiddleware } from '@hono/clerk-auth';
+import { serve } from '@hono/node-server';
+import { Hono } from 'hono';
+import sessionRoute from './routes/session.route.js';
+import { cors } from "hono/cors";
+import webhookRoute from './routes/webhooks.route.js';
 
 const app = new Hono()
 app.use('*', clerkMiddleware());
+app.use("*", cors({ origin: ["http://localhost:3002"] }));
 
 app.get('/health', (c) => {
 	return c.json({
@@ -14,9 +17,9 @@ app.get('/health', (c) => {
 	});
 })
 
-app.get('/test', shouldBeUser, (c) => {
-	return c.json({ "message": "payment service authenticated", userId:c.get("userId") });
-})
+
+app.route("/sessions", sessionRoute);
+app.route("/webhooks", webhookRoute);
 
 const start = async () => {
 	try {
