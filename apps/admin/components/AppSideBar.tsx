@@ -9,6 +9,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupActio
 import AddOrder from './AddOrder';
 import AddUser from './AddUser';
 import AddCategory from './AddCategory';
+import AddProduct from './AddProduct';
 
 interface item {
 	title: string;
@@ -111,7 +112,7 @@ export default function AppSideBar() {
 												</Link>
 											</SidebarMenuButton>
 										</SheetTrigger>
-										<EditUser />
+										<AddProduct />
 									</Sheet>
 								</SidebarMenuButton>
 							</SidebarMenuItem>

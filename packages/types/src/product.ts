@@ -64,7 +64,7 @@ export const ProductFormSchema = z.object({
     shortDescription: z.string({ error: "short description is required" }).min(2, { error: "short description is required" }).max(60),
     description: z.string({ error: "Description is required" }).min(10, { error: "description must be at least 10 characters" }).max(100),
     price: z.number({ error: "Price is required" }).min(1, { error: "Price Can't be below 1" }),
-    categorySlug: z.string({ error: "Category is required" }).min(1, { error: "Cagtegory is required" }),
+    categorySlug: z.string({ error: "Category is required" }).min(1, { error: "Category is required" }),
     sizes: z.array(z.enum(sizes)).min(1, { error: "at least 1 size is required" }),
     colors: z.array(z.enum(colors)).min(1, { error: "at least one color is required" }),
     images: z.record(z.string(), z.string(), { error: "Image for each color is required" })
