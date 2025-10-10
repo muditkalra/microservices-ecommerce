@@ -10,13 +10,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Button } from './ui/button';
 
 
-
 const formSchema = z.object({
-    username: z.string().min(4, { error: "username must be at least 4 characters" }).max(50),
+    fullname: z.string().min(2, { error: "fullname must be at least 2 characters" }).max(50),
     email: z.email({ error: "Invalid email" }),
     phone: z.number().min(10, { error: "phone number must be at least 10 characters" }).max(10),
-    location: z.string().min(2),
-    roles: z.enum(["admin", "user"])
+    address: z.string().min(1, "Address is required"),
+    city: z.string().min(1, "City is required")
 })
 
 export default function EditUser() {
@@ -24,11 +23,11 @@ export default function EditUser() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: "Donald Trump",
-            email: "donaldtrump@presidentofusa.com",
-            location: "White House",
+            fullname: "John Doe",
+            email: "john.doe@gmail.com",
+            address: "123, Main st",
             phone: 9999990999,
-            roles: "admin"
+            city: "Gurugram"
         }
     })
 
@@ -39,17 +38,18 @@ export default function EditUser() {
                 <SheetDescription asChild>
                     <Form {...form}>
                         <form action="" className='space-y-8'>
-                            <FormField control={form.control} name='username' render={({ field }) => (
+                            <FormField control={form.control} name='fullname' render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel>FullName</FormLabel>
                                     <FormControl>
                                         <Input {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        This is your public display username.
+                                        This is your public display full name.
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>)} />
+                                </FormItem>)}
+                            />
                             <FormField control={form.control} name='email' render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
@@ -60,7 +60,8 @@ export default function EditUser() {
                                         This is your public display email
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>)} />
+                                </FormItem>)}
+                            />
                             <FormField control={form.control} name='phone' render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Phone Number</FormLabel>
@@ -68,41 +69,36 @@ export default function EditUser() {
                                         <Input {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        This is your public display phone number.
+                                        This is your public display phone number. (optional)
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>)} />
-                            <FormField control={form.control} name='location' render={({ field }) => (
+                                </FormItem>)}
+                            />
+                            <FormField control={form.control} name='address' render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Location</FormLabel>
+                                    <FormLabel>Address</FormLabel>
                                     <FormControl>
                                         <Input {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        This is your public display location.
+                                        This is your public display address
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>)} />
-                            <FormField control={form.control} name='roles' render={({ field }) => (
+                                </FormItem>)}
+                            />
+                            <FormField control={form.control} name='city' render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Role</FormLabel>
+                                    <FormLabel>City</FormLabel>
                                     <FormControl>
-                                        <Select>
-                                            <SelectTrigger className='w-[150px]'>
-                                                <SelectValue placeholder="Role" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="admin">Admin</SelectItem>
-                                                <SelectItem value="user">User</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                        <Input {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Only Verified user can be admin
+                                        This is your public display city
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>)} />
-                            <Button>
+                                </FormItem>)}
+                            />
+                            <Button type='submit'>
                                 Submit
                             </Button>
                         </form>

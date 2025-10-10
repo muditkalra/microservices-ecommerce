@@ -93,6 +93,23 @@ export default function SingleUserPage() {
                         </div>
                     </div>
 
+                    {/* User Card container */}
+                    <div className="bg-primary-foreground p-4 rounded-lg space-y-2">
+                        <div className="flex item-center gap-2">
+                            <Avatar className=''>
+                                <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" alt='profile image' />
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
+                            <h1>
+                                Mudit kalra
+                            </h1>
+                        </div>
+                        <p className='text-sm text-muted-foreground'>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo aut consequuntur obcaecati nulla illum sunt.
+                        </p>
+                    </div>
+
+                    {/* User Information container */}
                     <div className="bg-primary-foreground p-4 rounded-lg">
                         <div className="flex items-center justify-between">
                             <h1 className="text-xl font-semibold">
@@ -115,49 +132,28 @@ export default function SingleUserPage() {
                                 <Progress value={66} />
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Username:</span><span> Donald Trump</span>
+                                <span className='font-bold'>Full name:</span><span> John Doe</span>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Email</span><span> donaldtrump@presidentofusa.com</span>
+                                <span className='font-bold'>Email</span><span> john.doe@gmail.com</span>
                             </div>
                             <div className="flex gap-2 items-center">
                                 <span className='font-bold'>Phone:</span><span> +1 999 999 0999</span>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Location</span><span> White house</span>
+                                <span className='font-bold'>Address</span><span>123, Main st</span>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Role</span><span>
-                                    <Badge>
-                                        President
-                                    </Badge>
-                                </span>
+                                <span className='font-bold'>City</span><span> Gurugram</span>
                             </div>
                         </div>
-                        <p className='text-sm text-muted-foreground mt-4'> Joined on 20 January, 2025</p>
-                    </div>
-
-                    <div className="bg-primary-foreground p-4 rounded-lg">
-                        <CardList title='Recent Transactions' />
+                        <p className='text-sm text-muted-foreground mt-4'> Joined on 20 September, 2025</p>
                     </div>
 
                 </div>
                 <div className="w-full xl:w-2/3 space-y-6">
                     {/* User Card container  */}
-                    <div className="bg-primary-foreground p-4 rounded-lg space-y-2">
-                        <div className="flex item-center gap-2">
-                            <Avatar className=''>
-                                <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" alt='profile image' />
-                                <AvatarFallback>CN</AvatarFallback>
-                            </Avatar>
-                            <h1>
-                                Mudit kalra
-                            </h1>
-                        </div>
-                        <p className='text-sm text-muted-foreground'>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo aut consequuntur obcaecati nulla illum sunt.
-                        </p>
-                    </div>
+
 
                     {/* chart container */}
                     <div className="bg-primary-foreground p-4 rounded-lg">

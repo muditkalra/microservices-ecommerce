@@ -1,8 +1,13 @@
 import type { Product, Category } from "@repo/product-db"
 import z from "zod";
 
-export type ProductType = Product;
-export type CategoryType = Category;
+// export type ProductType = Product; original
+export type ProductType = Omit<Product, "categorySlug" | "createdAt" | "updatedAt">;
+
+export type ProductsType = Product[];
+
+// export type CategoryType = Category; //original
+export type CategoryType = Omit<Category, "id">;
 
 export type StripeProductType = {
     id: string;
