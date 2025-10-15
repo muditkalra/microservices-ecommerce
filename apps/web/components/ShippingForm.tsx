@@ -27,6 +27,7 @@ export default function ShippingForm({ setShippingForm }: { setShippingForm: (da
 					id='name'
 					placeholder='John Doe'
 					{...register("name")}
+					value={"John Doe"}
 				/>
 				{errors.name && <p className='text-xs text-red-500'> {errors.name.message}</p>}
 			</div>
@@ -49,6 +50,7 @@ export default function ShippingForm({ setShippingForm }: { setShippingForm: (da
 					id='phone'
 					placeholder='1234567890'
 					{...register("phone")}
+					value={"9123456789"}
 				/>
 				{errors.phone && <p className='text-xs text-red-500'> {errors.phone.message}</p>}
 			</div>
@@ -60,6 +62,7 @@ export default function ShippingForm({ setShippingForm }: { setShippingForm: (da
 					id='address'
 					placeholder='123, Main Street, town'
 					{...register("address")}
+					value={"123,Main street"}
 				/>
 				{errors.address && <p className='text-xs text-red-500'> {errors.address.message}</p>}
 			</div>
@@ -71,6 +74,7 @@ export default function ShippingForm({ setShippingForm }: { setShippingForm: (da
 					id='city'
 					placeholder='Gurugram'
 					{...register("city")}
+					value={"gurugram"}
 				/>
 				{errors.city && <p className='text-xs text-red-500'> {errors.city.message}</p>}
 			</div>

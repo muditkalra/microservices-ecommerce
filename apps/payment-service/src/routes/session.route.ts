@@ -22,7 +22,7 @@ sessionRoute.post('/create-checkout-session', shouldBeUser, async (c) => {
             },
             quantity: item.quantity,
         }
-    }))
+    }));
 
     try {
         const session = await stripe.checkout.sessions.create({
@@ -31,11 +31,12 @@ sessionRoute.post('/create-checkout-session', shouldBeUser, async (c) => {
             mode: 'payment',
             ui_mode: 'custom',
             // The URL of your payment completion page
-            return_url: 'http://localhost:3002/return?session_id={CHECKOUT_SESSION_ID}' // for frontend client
+            return_url: 'http://localhost:3000/return?session_id={CHECKOUT_SESSION_ID}' // for frontend client
         });
+        console.log("payment service: stripe session created and return on localhost:3000");
         return c.json({ checkoutSessionClientSecret: session.client_secret });
     } catch (error) {
-        console.log(error);
+        console.log(error, "errror from payment");
         return c.json(error);
     }
 });

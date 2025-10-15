@@ -1,3 +1,2 @@
-export { type OrderSchemaType, Order, orderStatus } from "./order-model";
-
-export { connectOrderDB } from "./connection"
+export { Order, orderStatus, type OrderSchemaType } from "./order-model";
+export { connectOrderDB } from "./connection";

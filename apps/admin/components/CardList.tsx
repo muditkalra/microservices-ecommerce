@@ -1,83 +1,84 @@
-import React from 'react';
-import { Card, CardContent, CardFooter, CardTitle } from './ui/card';
+import { auth } from '@clerk/nextjs/server';
+import { OrderType, ProductType } from '@repo/types';
 import Image from 'next/image';
 import { Badge } from './ui/badge';
+import { Card, CardContent, CardFooter, CardTitle } from './ui/card';
 
 
-const popularProduct = [
-    {
-        id: 1,
-        name: "Adidas CoreFit T-Shirt",
-        shortDescription:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        description:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        price: 39.9,
-        sizes: ["s", "m", "l", "xl", "xxl"],
-        colors: ["gray", "purple", "green"],
-        images: {
-            gray: "/products/1g.png",
-            purple: "/products/1p.png",
-            green: "/products/1gr.png",
-        },
-    },
-    {
-        id: 2,
-        name: "Puma Ultra Warm Zip",
-        shortDescription:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        description:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        price: 59.9,
-        sizes: ["s", "m", "l", "xl"],
-        colors: ["gray", "green"],
-        images: { gray: "/products/2g.png", green: "/products/2gr.png" },
-    },
-    {
-        id: 3,
-        name: "Nike Air Essentials Pullover",
-        shortDescription:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        description:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        price: 69.9,
-        sizes: ["s", "m", "l"],
-        colors: ["green", "blue", "black"],
-        images: {
-            green: "/products/3gr.png",
-            blue: "/products/3b.png",
-            black: "/products/3bl.png",
-        },
-    },
-    {
-        id: 4,
-        name: "Nike Dri Flex T-Shirt",
-        shortDescription:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        description:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        price: 29.9,
-        sizes: ["s", "m", "l"],
-        colors: ["pink", "white"],
-        images: { white: "/products/4w.png", pink: "/products/4p.png" },
-    },
-    {
-        id: 5,
-        name: "Under Armour StormFleece",
-        shortDescription:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        description:
-            "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-        price: 49.9,
-        sizes: ["s", "m", "l"],
-        colors: ["orange", "red", "black"],
-        images: {
-            red: "/products/5r.png",
-            orange: "/products/5o.png",
-            black: "/products/5bl.png",
-        },
-    },
-];
+// const products = [
+//     {
+//         id: 1,
+//         name: "Adidas CoreFit T-Shirt",
+//         shortDescription:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         description:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         price: 39.9,
+//         sizes: ["s", "m", "l", "xl", "xxl"],
+//         colors: ["gray", "purple", "green"],
+//         images: {
+//             gray: "/products/1g.png",
+//             purple: "/products/1p.png",
+//             green: "/products/1gr.png",
+//         },
+//     },
+//     {
+//         id: 2,
+//         name: "Puma Ultra Warm Zip",
+//         shortDescription:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         description:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         price: 59.9,
+//         sizes: ["s", "m", "l", "xl"],
+//         colors: ["gray", "green"],
+//         images: { gray: "/products/2g.png", green: "/products/2gr.png" },
+//     },
+//     {
+//         id: 3,
+//         name: "Nike Air Essentials Pullover",
+//         shortDescription:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         description:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         price: 69.9,
+//         sizes: ["s", "m", "l"],
+//         colors: ["green", "blue", "black"],
+//         images: {
+//             green: "/products/3gr.png",
+//             blue: "/products/3b.png",
+//             black: "/products/3bl.png",
+//         },
+//     },
+//     {
+//         id: 4,
+//         name: "Nike Dri Flex T-Shirt",
+//         shortDescription:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         description:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         price: 29.9,
+//         sizes: ["s", "m", "l"],
+//         colors: ["pink", "white"],
+//         images: { white: "/products/4w.png", pink: "/products/4p.png" },
+//     },
+//     {
+//         id: 5,
+//         name: "Under Armour StormFleece",
+//         shortDescription:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         description:
+//             "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//         price: 49.9,
+//         sizes: ["s", "m", "l"],
+//         colors: ["orange", "red", "black"],
+//         images: {
+//             red: "/products/5r.png",
+//             orange: "/products/5o.png",
+//             black: "/products/5bl.png",
+//         },
+//     },
+// ];
 
 const latestTransactions = [
     {
@@ -122,7 +123,24 @@ const latestTransactions = [
     },
 ];
 
-export default function CardList({ title }: { title: string }) {
+export default async function CardList({ title }: { title: "Popular Products" | "latest Transactions" }) {
+
+    const { getToken } = await auth()
+    const token = await getToken();
+    let products: ProductType[] = [];
+    let orders: OrderType[] = [];
+    
+    if (title == "Popular Products") {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products?limit=5&popular=true`);
+        products = await res.json();
+    } else {
+        orders = await fetch(`${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/orders?limit=5`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(res => res.json());
+    }
 
     return (
         <div>
@@ -130,10 +148,10 @@ export default function CardList({ title }: { title: string }) {
                 {title}
             </h1>
             <div className="flex flex-col gap-2">
-                {title === "Popular Product" ? popularProduct.map((item, index) => (
+                {title === "Popular Products" ? products.map((item, index) => (
                     <Card key={index} className='flex flex-row items-center justify-between gap-4 p-4'>
                         <div className="w-12 h-12 rounded-sm relative overflow-hidden">
-                            <Image src={Object.values(item.images)[0] || ""} alt={item.name} fill className='object-cover' />
+                            <Image src={Object.values(item.images as Record<string, string>)[0] || ""} alt={item.name} fill className='object-cover' />
                         </div>
                         <CardContent className='p-0 flex-1'>
                             <CardTitle className='text-sm font-medium'>
@@ -141,22 +159,20 @@ export default function CardList({ title }: { title: string }) {
                             </CardTitle>
                         </CardContent>
                         <CardFooter>
-                            Rs. {item.price}k
+                            Rs. {item.price}
                         </CardFooter>
                     </Card>
-                )) : latestTransactions.map((item, index) => (
-                    <Card key={index} className='flex flex-row items-center justify-between gap-4 p-4'>
-                        <div className="w-12 h-12 rounded-sm relative overflow-hidden">
-                            <Image src={item.image} alt={item.title} fill className='object-cover' />
-                        </div>
+                )) : orders.map((item) => (
+                    <Card key={item._id} className='flex flex-row items-center justify-between gap-4 p-4'>
+                        
                         <CardContent className='p-0 flex-1'>
                             <CardTitle className='text-sm font-medium'>
-                                {item.title}
+                                {item.email}
                             </CardTitle>
                         </CardContent>
-                        <Badge variant={"secondary"}> {item.badge}</Badge>
+                        <Badge variant={"secondary"}> {item.status}</Badge>
                         <CardFooter>
-                            Rs. {item.count / 1000}k
+                            Rs. {item.amount}
                         </CardFooter>
                     </Card>
                 ))}

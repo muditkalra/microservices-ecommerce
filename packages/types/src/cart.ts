@@ -1,15 +1,7 @@
 import { Product } from "@repo/product-db";
-import { z } from "zod"
-import { ProductType } from "./product";
+import { z } from "zod";
 
-// export type CartItemType = Product & {
-//     quantity: number,
-//     selectedSize: string,
-//     selectedColor: string
-// }; // original;
-
-
-export type CartItemType = Omit<Product, "categorySlug" | "createdAt" | "updatedAt"> & {
+export type CartItemType = Product & {
     quantity: number,
     selectedSize: string,
     selectedColor: string

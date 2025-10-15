@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { CategoryType } from "@repo/types";
 import {
 	Briefcase,
 	Footprints,
@@ -12,11 +11,11 @@ import {
 } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const categories: (CategoryType & { icon: React.ReactElement })[] = [
+const categories = [
 	{
 		name: "All",
 		icon: <ShoppingBasket className="w-4 h-4" />,
-		slug: "all",
+		slug: "",
 	},
 	{
 		name: "T-shirts",
@@ -63,10 +62,14 @@ export default function Categories() {
 
 	const handleChange = (slug: string | null) => {
 		const params = new URLSearchParams(searchParams);
-		params.set("category", slug || "all");
-		router.push(`${pathname}/?${params.toString()}`, { scroll: false });
+		if (slug) {
+			params.set("category", slug || "");
+			router.push(`${pathname}/?${params.toString()}`, { scroll: false });
+		} else {
+			router.push("/", { scroll: false });
+		}
 	}
-	
+
 	return (
 		<div className="grid grid-col-2 sm:grid-cols-3 md:grid-col-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 bg-gray-100 p-2 rounded-lg mb-6 text-sm">
 			{categories.map(category => (

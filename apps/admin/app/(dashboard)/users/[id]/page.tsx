@@ -1,16 +1,57 @@
 import AppLineChart from '@/components/AppLineChart'
-import CardList from '@/components/CardList'
 import EditUser from '@/components/EditUser'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import { Progress } from '@/components/ui/progress'
 import { Sheet, SheetTrigger } from '@/components/ui/sheet'
+import { auth, type User } from '@clerk/nextjs/server'
 import { BadgeCheck, Candy, Citrus, Edit, Shield } from 'lucide-react'
+import Link from 'next/link'
 
-export default function SingleUserPage() {
+
+const getData = async (id: string): Promise<User | null> => {
+    const { getToken } = await auth();
+    const token = await getToken();
+    try {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_AUTH_SERVICE_URL}/users/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        if (!res.ok) {
+            throw new Error(`Request failed with status ${res.status}`);
+        }
+        const data = await res.json();
+        return data;
+    } catch (err) {
+        console.log(err, "error");
+        return null;
+    }
+};
+
+export default async function SingleUserPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const data = await getData(id);
+
+    if (!data) {
+        return <div className="flex flex-col justify-center items-center gap-4">
+            <div className="">
+                No User found
+            </div>
+            <Link href={"/"}>
+                <Button variant={"link"} >
+                    home
+                </Button>
+            </Link>
+        </div>
+    }
+
     return (
         <div>
             <Breadcrumb>
@@ -24,11 +65,11 @@ export default function SingleUserPage() {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>singleUser</BreadcrumbPage>
+                        <BreadcrumbPage>{(data?.firstName + " " + data?.lastName ? data?.lastName : "") || (data?.username) || "-"}</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            {/* containere */}
+            {/* container */}
 
             <div className="mt-4 flex flex-col xl:flex-row gap-8">
                 {/* left */}
@@ -97,11 +138,11 @@ export default function SingleUserPage() {
                     <div className="bg-primary-foreground p-4 rounded-lg space-y-2">
                         <div className="flex item-center gap-2">
                             <Avatar className=''>
-                                <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" alt='profile image' />
-                                <AvatarFallback>CN</AvatarFallback>
+                                <AvatarImage src={data?.imageUrl} alt='profile image' />
+                                <AvatarFallback>{(data?.firstName?.charAt(0) + " " + data?.lastName ? data?.lastName?.charAt(0) : "") || (data?.username?.charAt(0))}</AvatarFallback>
                             </Avatar>
                             <h1>
-                                Mudit kalra
+                                {(data?.firstName + " " + data?.lastName ? data?.lastName : "") || (data?.username)} | <span className='text-muted-foreground'>{data?.emailAddresses[0]?.emailAddress} </span>
                             </h1>
                         </div>
                         <p className='text-sm text-muted-foreground'>
@@ -132,22 +173,22 @@ export default function SingleUserPage() {
                                 <Progress value={66} />
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Full name:</span><span> John Doe</span>
+                                <span className='font-bold'>Full name:</span><span>  {(data?.firstName + " " + data?.lastName ? data?.lastName : "") || (data?.username) || "-"}</span>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Email</span><span> john.doe@gmail.com</span>
+                                <span className='font-bold'>Email</span><span> {data.emailAddresses[0]?.emailAddress || "-"}</span>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Phone:</span><span> +1 999 999 0999</span>
+                                <span className='font-bold'>Phone:</span><span> {data.phoneNumbers[0]?.phoneNumber || "-"}</span>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>Address</span><span>123, Main st</span>
+                                <span className='font-bold'>Role</span><span>{String(data.publicMetadata?.role) || "user"}</span>
                             </div>
                             <div className="flex gap-2 items-center">
-                                <span className='font-bold'>City</span><span> Gurugram</span>
+                                <span className='font-bold'>Status</span><span> {data.banned ? "banned" : "active"}</span>
                             </div>
                         </div>
-                        <p className='text-sm text-muted-foreground mt-4'> Joined on 20 September, 2025</p>
+                        <p className='text-sm text-muted-foreground mt-4'> Joined on {new Date(data.createdAt).toLocaleDateString("en-IN")}</p>
                     </div>
 
                 </div>

@@ -4,28 +4,45 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { type User } from "@clerk/nextjs/server";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
-export type Payment = {
-    id: string;
-    amount: number;
-    fullName: string;
-    userId: string;
-    email: string
-    status: "pending" | "processing" | "success" | "failed"
-};
+// export type User = {
+//     id: string;
+//     avatar: string;
+//     fullName: string;
+//     email: string;
+//     status: "active" | "inactive";
+// };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<User>[] = [
     {
         id: "Select",
         header: ({ table }) => <Checkbox onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)} checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")} />,
         cell: ({ row }) => <Checkbox onCheckedChange={(value) => row.toggleSelected(!!value)} checked={row.getIsSelected()} />
     },
     {
-        accessorKey: "fullName",
+        accessorKey: "avatar",
+        header: "Avatar",
+        cell: ({ row }) => {
+            const user = row.original;
+            return (
+                <div className="relative w-9 h-9">
+                    <Image src={user.imageUrl} alt={user.firstName || user.username || "-"} fill className="rounded-full object-cover" />
+                </div>
+            )
+        }
+    },
+    {
+        accessorKey: "firstName",
         header: "Username",
+        cell: ({ row }) => {
+            const user = row.original;
+            return <div className="">{user.firstName || user.username || "-"}</div>;
+        },
     },
     {
         accessorKey: "email",
@@ -40,34 +57,36 @@ export const columns: ColumnDef<Payment>[] = [
                 </Button>
             )
         },
+        cell: ({ row }) => {
+            const user = row.original;
+            return <div className="">{user.emailAddresses[0]?.emailAddress}</div>;
+        },
     },
     {
         accessorKey: "status",
         header: "Status",
         cell: ({ row }) => {
-            const status = row.getValue("status");
-            return (
-                <div className={cn(`p-1.5 rounded-md w-max text-xs`, status === "pending" && "bg-yellow-500/40", status === "success" && "bg-green-500/40", status == "failed" && "bg-red-500/40")}>{status as string}</div>
-            )
-        }
-    },
-    {
-        accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amount"))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(amount)
+            const user = row.original
+            const status = user.banned ? "banned" : "active"
 
-            return <div className="text-right font-medium">{formatted}</div>
+            return (
+                <div
+                    className={cn(
+                        `p-1 rounded-md w-max text-xs`,
+                        status === "active" && "bg-green-500/40",
+                        status === "banned" && "bg-red-500/40"
+                    )}
+                >
+                    {status as string}
+                </div>
+            );
         },
     },
+
     {
         id: "actions",
         cell: ({ row }) => {
-            const payment = row.original
+            const user = row.original
 
             return (
                 <DropdownMenu>
@@ -80,17 +99,16 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(payment.id)}
+                            onClick={() => navigator.clipboard.writeText(user.id)}
                         >
-                            Copy payment ID
+                            Copy User ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
-                            <Link href={`/users/${payment.userId}`}>
-                                View Customer
+                            <Link href={`/users/${user.id}`}>
+                                View User
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

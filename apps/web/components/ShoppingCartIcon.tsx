@@ -1,8 +1,8 @@
 "use client";
 
-import useCartStore from '@/stores/cartStore'
-import { ShoppingCart } from 'lucide-react'
-import Link from 'next/link'
+import useCartStore from '@/stores/cartStore';
+import { ShoppingCart } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ShoppingCartIcon() {
 

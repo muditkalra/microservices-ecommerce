@@ -23,13 +23,13 @@ export const shouldBeUser = (req: Request, res: Response, next: NextFunction) =>
 };
 
 export const shouldBeAdmin = (req: Request, res: Response, next: NextFunction) => {
-    const { userId, sessionClaims } = getAuth(req)
+    const { userId, sessionClaims } = getAuth(req);
 
     if (!userId) {
         return res.status(401).json({ message: 'You are not logged in' });
     }
 
-    const claims = sessionClaims.metadata as CustomJwtSessionClaims
+    const claims = sessionClaims as CustomJwtSessionClaims;
 
     if (claims.metadata?.role !== "admin") {
         return res.status(401).json({ message: 'Unauthorized' });

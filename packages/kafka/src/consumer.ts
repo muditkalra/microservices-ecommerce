@@ -1,4 +1,4 @@
-import type { Consumer, Kafka, Producer } from "kafkajs";
+import type { Consumer, Kafka } from "kafkajs";
 
 type topic = {
     topicName: string,
@@ -11,8 +11,6 @@ export const createConsumer = (kafka: Kafka, groupId: string) => {
         await consumer.connect();
         console.log("kafka consumer connected", groupId)
     };
-
-
 
     const subscribe = async (topics: topic[]) => {
         await consumer.subscribe({
@@ -31,13 +29,11 @@ export const createConsumer = (kafka: Kafka, groupId: string) => {
                         }
                     }
                 } catch (error) {
-                    console.log("error processing message in cosumer", error);
+                    console.log("error processing message in consumer", error);
                 }
             },
         });
     };
-
-
 
     const disconnect = async () => {
         await consumer.disconnect();

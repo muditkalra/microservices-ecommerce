@@ -1,7 +1,6 @@
-import { OrderType } from "@repo/types";
-import { consumer } from "./kafka"
-import { createOrder } from "./order";
 import { OrderSchemaType } from "@repo/order-db";
+import { consumer } from "./kafka";
+import { createOrder } from "./order";
 
 export const runKafkaSubscriptions = () => {
 
@@ -10,6 +9,6 @@ export const runKafkaSubscriptions = () => {
         console.log("received message:payment:successful", order);
         await createOrder(order);
     };
-    
+
     consumer.subscribe([{ topicName: "payment.successful", handler: createOrderHandler }]);
 }

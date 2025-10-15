@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-table"
 
 import { DataTablePagination } from "@/components/DataTablePagination"
+import { Button } from "@/components/ui/button"
 import {
     Table,
     TableBody,
@@ -19,9 +20,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import React from "react"
-import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
+import React from "react"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]

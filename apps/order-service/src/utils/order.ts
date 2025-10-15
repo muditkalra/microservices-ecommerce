@@ -1,5 +1,4 @@
-import { Order, OrderSchemaType } from "@repo/order-db"
-import { OrderType } from "@repo/types"
+import { Order, OrderSchemaType } from "@repo/order-db";
 import { producer } from "./kafka";
 
 export const createOrder = async (order: OrderSchemaType) => {

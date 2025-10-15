@@ -4,57 +4,71 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { OrderType } from "@repo/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
-import { ProductType } from "@repo/types"
-import Image from "next/image";
 
+// export type Payment = {
+//     id: string;
+//     amount: number;
+//     fullName: string;
+//     userId: string;
+//     email: string
+//     status: "pending" | "processing" | "success" | "failed"
+// };
 
-export const columns: ColumnDef<ProductType>[] = [
+export const columns: ColumnDef<OrderType>[] = [
     {
         id: "Select",
         header: ({ table }) => <Checkbox onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)} checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")} />,
         cell: ({ row }) => <Checkbox onCheckedChange={(value) => row.toggleSelected(!!value)} checked={row.getIsSelected()} />
     },
     {
-        accessorKey: "image",
-        header: "Image",
-        cell: ({ row }) => {
-            const product = row.original;
-            return (
-                <div className="relative w-9 h-9">
-                    <Image src={(product.images as Record<string, string>)?.[product.colors[0]] as string || ""} alt={product.name} fill className="rounded-full object-cover" />
-                </div>
-            )
-        }
+        accessorKey: "_id",
+        header: "Id",
     },
     {
-        accessorKey: "name",
-        header: "Name",
-    },
-    {
-        accessorKey: "price",
+        accessorKey: "email",
         header: ({ column }) => {
             return (
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Price
+                    Email
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
     },
     {
-        accessorKey: "shortDescription",
-        header: "Description"
+        accessorKey: "status",
+        header: "Status",
+        cell: ({ row }) => {
+            const status = row.getValue("status");
+            return (
+                <div className={cn(`p-1.5 rounded-md w-max text-xs`, status === "pending" && "bg-yellow-500/40", status === "success" && "bg-green-500/40", status == "failed" && "bg-red-500/40")}>{status as string}</div>
+            )
+        }
+    },
+    {
+        accessorKey: "amount",
+        header: () => <div className="text-right">Amount</div>,
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("amount"))
+            const formatted = new Intl.NumberFormat("en-IN", {
+                style: "currency",
+                currency: "INR",
+            }).format(amount / 100);
+
+            return <div className="text-right font-medium">{formatted}</div>
+        },
     },
     {
         id: "actions",
         cell: ({ row }) => {
-            const product = row.original
+            const order = row.original
 
             return (
                 <DropdownMenu>
@@ -67,16 +81,17 @@ export const columns: ColumnDef<ProductType>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(product.id.toString())}
+                            onClick={() => navigator.clipboard.writeText(order._id)}
                         >
                             Copy payment ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
-                            <Link href={`/users/${product.id.toString()}`}>
+                            <Link href={`/users/${order.userId}`}>
                                 View Customer
                             </Link>
                         </DropdownMenuItem>
+                        <DropdownMenuItem>View payment details</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

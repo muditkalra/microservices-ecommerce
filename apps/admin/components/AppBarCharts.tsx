@@ -1,6 +1,7 @@
 "use client";
 
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
+import { OrderChartType } from "@repo/types";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 
@@ -25,7 +26,10 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export default function AppBarCharts() {
+export default function AppBarCharts({ dataPromise }: { dataPromise: Promise<OrderChartType[]> }) {
+
+    // const chartData = use(dataPromise);
+    // console.log(chartData,"chart data");
     return (
         <div>
             <h1 className="font-medium text-lg mb-4">Total Revenue</h1>

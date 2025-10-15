@@ -27,7 +27,7 @@ export const shouldBeAdmin = async (req: FastifyRequest, reply: FastifyReply) =>
         return reply.status(401).send({ message: 'You are not logged in' });
     }
 
-    const claims = sessionClaims.metadata as CustomJwtSessionClaims;
+    const claims = sessionClaims as CustomJwtSessionClaims;
 
     if (claims.metadata?.role !== "admin") {
         return reply.status(403).send({ message: 'Unauthorized' });

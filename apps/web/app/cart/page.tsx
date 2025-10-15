@@ -1,12 +1,12 @@
 "use client";
-import PaymentForm from '@/components/PaymentForm';
 import ShippingForm from '@/components/ShippingForm';
+import StripePaymentForm from '@/components/StripePaymentForm';
 import useCartStore from '@/stores/cartStore';
-import { CartItemsType, ProductType, ShippingFormInputs } from '@repo/types';
-import { ArrowRight, Trash2 } from 'lucide-react';
+import { ShippingFormInputs } from '@repo/types';
+import { ArrowRight, ShoppingCart, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { act, useState } from 'react'
+import { useState } from 'react';
 
 interface step {
     id: number;
@@ -98,7 +98,7 @@ export default function CartPage() {
     const { cart, removeFromCart } = useCartStore();
 
 
-    return (
+    return (cart.length > 0 ?
         <div className='flex flex-col gap-8 items-center bg-center justify-center mt-12'>
             {/* title */}
             <h1 className='text-2xl font-medium'> Your shopping chart</h1>
@@ -113,6 +113,7 @@ export default function CartPage() {
                     </div>
                 ))}
             </div>
+
             {/* Steps and details */}
             <div className="w-full flex flex-col lg:flex-row gap-5">
                 {/* steps */}
@@ -134,7 +135,7 @@ export default function CartPage() {
                                             <p className='text-xs text-gray-500'>Size: {" "} {item.selectedSize}</p>
                                             <p className='text-xs text-gray-500'>Color:{" "} {item.selectedColor}</p>
                                         </div>
-                                        <p className='font-medium'>Rs. {item.price.toFixed(2)}</p>
+                                        <p className='font-medium'>Rs. {(item.price * item.quantity).toFixed(2)}</p>
                                     </div>
 
                                 </div>
@@ -147,21 +148,22 @@ export default function CartPage() {
                         activeStep === 2 ?
                             <ShippingForm setShippingForm={setShippingForm} /> :
                             activeStep === 3 && shippingForm ?
-                                <PaymentForm /> :
+                                //  Stripe Payment form
+                                <StripePaymentForm shippingForm={shippingForm} /> :
                                 <p className='text-sm text-gray-500'>Please fill previous form</p>
                     }
                 </div>
 
                 {/* Details */}
                 <div className="w-full lg:w-7/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8 h-max">
-                    <h2 className='font-semibold'> Card details</h2>
+                    <h2 className='font-semibold'> Cart details</h2>
                     <div className="flex flex-col gap-4">
                         <div className="flex justify-between text-sm">
                             <p className='text-gray-500'>Subtotal:</p>
                             <p className='font-medium'>Rs. {cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</p>
                         </div>
                         <div className="flex justify-between text-sm">
-                            <p className='text-gray-500'>Discount (10%):</p>
+                            <p className='text-gray-500'>Discount:</p>
                             <p className='font-medium'>Rs. 10</p>
                         </div>
                         <div className="flex justify-between text-sm">
@@ -180,6 +182,10 @@ export default function CartPage() {
                     </button>}
                 </div>
             </div>
+        </div>
+        :
+        <div className="mt-10 flex gap-4 justify-center items-center h-[100px]">
+            Your cart is empty. Start Shopping <ShoppingCart />
         </div>
     )
 }

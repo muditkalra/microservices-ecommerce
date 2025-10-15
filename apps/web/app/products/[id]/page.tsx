@@ -3,34 +3,44 @@ import { ProductType } from "@repo/types";
 import Image from "next/image";
 
 
-const product: ProductType = {
-    id: 1,
-    name: "Adidas CoreFit T-Shirt",
-    shortDescription:
-        "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    description:
-        "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-    price: 59.9,
-    sizes: ["xs", "s", "m", "l", "xl"],
-    colors: ["gray", "purple", "green"],
-    images: {
-        gray: "/products/1g.png",
-        purple: "/products/1p.png",
-        green: "/products/1gr.png",
-    },
-};
+// const product: ProductType = {
+//     id: 1,
+//     name: "Adidas CoreFit T-Shirt",
+//     shortDescription:
+//         "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     description:
+//         "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+//     price: 59.9,
+//     sizes: ["xs", "s", "m", "l", "xl"],
+//     colors: ["gray", "purple", "green"],
+//     images: {
+//         gray: "/products/1g.png",
+//         purple: "/products/1p.png",
+//         green: "/products/1gr.png",
+//     },
+// };
 
-export const generateMetadata = async ({ params }: { params: { id: string } }) => {
+
+const fetchProduct = async (id: string) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_UR}/products/${id}`);
+    const data: ProductType = await res.json();
+    return data;
+}
+
+export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }) => {
     //  get details from db
-
+    const { id } = await params;
+    const product = await fetchProduct(id);
     return {
         title: product.name,
         description: product.shortDescription
     }
 }
 
-export default async function SingleProductPage({ searchParams }: { searchParams: Promise<{ color: string; size: string }> }) {
+export default async function SingleProductPage({ params, searchParams }: { params: Promise<{ id: string }>, searchParams: Promise<{ color: string; size: string }> }) {
 
+    const { id } = await params;
+    const product = await fetchProduct(id);
     const { size, color } = await searchParams
     const selectedColor = (color || product.colors[0] as string);
     const selectedSize = (size || product.sizes[0] as string);
@@ -53,9 +63,9 @@ export default async function SingleProductPage({ searchParams }: { searchParams
 
                 {/* card info */}
                 <div className="flex items-center gap-2 mt-4">
-                    <Image src={"/klarna.png"} alt="klarna" width={50} height={25} className="rounded-md" />
-                    <Image src={"/cards.png"} alt="cards" width={50} height={25} className="rounded-md" />
-                    <Image src={"/stripe.png"} alt="stripe" width={50} height={25} className="rounded-md" />
+                    <Image src="/klarna.png" alt="klarna" width={50} height={25} className="rounded-md" />
+                    <Image src="/cards.png" alt="cards" width={50} height={25} className="rounded-md" />
+                    <Image src="/stripe.png" alt="stripe" width={50} height={25} className="rounded-md" />
                 </div>
                 <p className="text-gray-500 text-xs">
                     By clicking Pay Now, you agree to our{" "}

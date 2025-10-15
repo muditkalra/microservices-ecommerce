@@ -1,13 +1,11 @@
-import type { Product, Category } from "@repo/product-db"
+import type { Category, Product } from "@repo/product-db";
 import z from "zod";
 
-// export type ProductType = Product; original
-export type ProductType = Omit<Product, "categorySlug" | "createdAt" | "updatedAt">;
+export type ProductType = Product;
 
 export type ProductsType = Product[];
 
-// export type CategoryType = Category; //original
-export type CategoryType = Omit<Category, "id">;
+export type CategoryType = Category;
 
 export type StripeProductType = {
     id: string;
@@ -62,7 +60,7 @@ export const sizes = [
 export const ProductFormSchema = z.object({
     name: z.string({ error: "Product name is required" }).min(2, { error: "Product name must be at least 2 characters" }),
     shortDescription: z.string({ error: "short description is required" }).min(2, { error: "short description is required" }).max(60),
-    description: z.string({ error: "Description is required" }).min(10, { error: "description must be at least 10 characters" }).max(100),
+    description: z.string({ error: "Description is required" }).min(10, { error: "description must be at least 10 characters" }).max(300),
     price: z.number({ error: "Price is required" }).min(1, { error: "Price Can't be below 1" }),
     categorySlug: z.string({ error: "Category is required" }).min(1, { error: "Category is required" }),
     sizes: z.array(z.enum(sizes)).min(1, { error: "at least 1 size is required" }),

@@ -1,6 +1,6 @@
 import { getAuth } from "@hono/clerk-auth";
-import { createMiddleware } from "hono/factory";
 import { type CustomJwtSessionClaims } from "@repo/types";
+import { createMiddleware } from "hono/factory";
 
 export const shouldBeUser = createMiddleware<{
     Variables: {
@@ -31,7 +31,7 @@ export const shouldBeAdmin = createMiddleware<{
         })
     }
 
-    const claims = auth.sessionClaims.metadata as CustomJwtSessionClaims;
+    const claims = auth.sessionClaims as CustomJwtSessionClaims;
 
     if (claims.metadata?.role !== "admin") {
         c.status(403);

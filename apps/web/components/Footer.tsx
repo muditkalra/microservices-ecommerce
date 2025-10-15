@@ -1,14 +1,13 @@
 import { Copyright } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 
 export default function Footer() {
     return (
         <div className='mt-16 flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-between md:gap-0 bg-gray-800 p-8 rounded-lg'>
             <div className="flex flex-col gap-2 items-center md:items-start">
                 <Link href={"/"} className='flex items-center gap-2'>
-                    <Image src={"/next.svg"} alt='Logo' width={56} height={56} className='w-6 h-6 md:w-14 md:h-14' />
+                    <Image src="/next.svg" alt='Logo' width={56} height={56} className='w-6 h-6 md:w-14 md:h-14' />
                     <p className=' hidden md:block font-medium tracking-wider text-white'>Bazaar</p>
                 </Link>
                 <p className='text-sm text-gray-400 flex gap-2 items-center'><Copyright className='w-4 h-4' />Bazaar 2025</p>

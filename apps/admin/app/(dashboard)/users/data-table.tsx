@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-table"
 
 import { DataTablePagination } from "@/components/DataTablePagination"
+import { Button } from "@/components/ui/button"
 import {
     Table,
     TableBody,
@@ -19,9 +20,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import React from "react"
-import { Button } from "@/components/ui/button"
+import { useAuth } from "@clerk/nextjs"
+import { User } from "@clerk/nextjs/server"
+import { useMutation } from "@tanstack/react-query"
 import { Trash2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import React from "react"
+import { toast } from "sonner"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -50,12 +55,45 @@ export function DataTable<TData, TValue>({
         },
     })
 
+
+    const { getToken } = useAuth();
+    const router = useRouter()
+
+    const mutation = useMutation({
+        mutationFn: async () => {
+            const token = await getToken();
+            const selectedRows = table.getSelectedRowModel().rows;
+
+            Promise.all(
+                selectedRows.map(async (row) => {
+                    const userId = (row.original as User).id;
+                    const res = await fetch(
+                        `${process.env.NEXT_PUBLIC_AUTH_SERVICE_URL}/users/${userId}`,
+                        {
+                            method: "DELETE",
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    );
+                })
+            );
+        },
+        onSuccess: () => {
+            toast.success("User(s) deleted successfully");
+            router.refresh()
+        },
+        onError: (error) => {
+            toast.error(error.message);
+        },
+    });
+
     return (
         <div className="overflow-hidden rounded-md border">
             {Object.keys(rowSelection).length > 0 && <div className="flex justify-end">
-                <Button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm m-4 cursor-pointer">
+                <Button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm m-4 cursor-pointer" onClick={() => mutation.mutate()} disabled={mutation.isPending}>
                     <Trash2 />
-                    Delete Payment(s)
+                    {mutation.isPending ? "Deleting" : "Delete User(s)"}
                 </Button>
             </div>}
             <Table>

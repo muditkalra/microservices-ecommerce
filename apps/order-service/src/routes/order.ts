@@ -1,8 +1,8 @@
 import { Order } from "@repo/order-db";
+import { OrderChartType } from "@repo/types";
+import { startOfMonth, subMonths } from "date-fns";
 import { FastifyInstance } from "fastify";
 import { shouldBeAdmin, shouldBeUser } from "../middleware/authMiddleware";
-import { startOfMonth, subMonths } from "date-fns";
-import { OrderChartType } from "@repo/types";
 
 export const orderRoute = async (fastify: FastifyInstance) => {
     fastify.get("/user-orders", { preHandler: shouldBeUser }, async (req, reply) => {

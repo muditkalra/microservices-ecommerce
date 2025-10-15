@@ -1,15 +1,13 @@
-import { Calendar, ChevronDown, ChevronUp, Home, Inbox, LucideIcon, Plus, Projector, Search, Settings, Shirt, ShoppingBasket, User, User2 } from 'lucide-react';
+import { Calendar, ChevronUp, Home, Inbox, LucideIcon, Plus, Search, Settings, Shirt, ShoppingBasket, User, User2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import EditUser from './EditUser';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import AddCategory from './AddCategory';
+import AddOrder from './AddOrder';
+import AddProduct from './AddProduct';
+import AddUser from './AddUser';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Sheet, SheetTrigger } from './ui/sheet';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarSeparator } from './ui/sidebar';
-import AddOrder from './AddOrder';
-import AddUser from './AddUser';
-import AddCategory from './AddCategory';
-import AddProduct from './AddProduct';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarSeparator } from './ui/sidebar';
 
 interface item {
 	title: string;
@@ -24,22 +22,22 @@ const items: item[] = [
 	},
 	{
 		title: "Inbox",
-		url: "#",
+		url: "/",
 		icon: Inbox
 	},
 	{
 		title: "Calender",
-		url: "#",
+		url: "/",
 		icon: Calendar
 	},
 	{
 		title: "Search",
-		url: "#",
+		url: "/",
 		icon: Search
 	},
 	{
 		title: "Setting",
-		url: "#",
+		url: "/",
 		icon: Settings
 	},
 ]
@@ -53,7 +51,7 @@ export default function AppSideBar() {
 					<SidebarMenuItem >
 						<SidebarMenuButton asChild>
 							<Link href={"/"}>
-								<Image src={"./globe.svg"} alt='logo' width={20} height={20} />
+								<Image src="/globe.svg" alt='logo' width={20} height={20} />
 								<span>Bazaar</span>
 							</Link>
 						</SidebarMenuButton>
@@ -71,7 +69,7 @@ export default function AppSideBar() {
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton asChild>
-										<Link href={item.title}>
+										<Link href={item.url}>
 											<item.icon />
 											<span>{item.title}</span>
 										</Link>
@@ -180,7 +178,7 @@ export default function AppSideBar() {
 						<SidebarMenu>
 							<SidebarMenuItem>
 								<SidebarMenuButton asChild>
-									<Link href={"/payments"}>
+									<Link href={"/orders"}>
 										<ShoppingBasket />
 										<span>See All Transactions</span>
 									</Link>

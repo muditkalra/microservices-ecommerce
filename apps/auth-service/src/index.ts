@@ -1,9 +1,9 @@
-import express, { type NextFunction, type Request, type Response } from "express";
+import { clerkMiddleware } from "@clerk/express";
 import cors from "cors";
 import { config } from "dotenv";
-import { clerkMiddleware } from "@clerk/express";
-import userRouter from "./routes/user.route.js";
+import express, { type NextFunction, type Request, type Response } from "express";
 import { shouldBeAdmin } from "./middleware/authMiddleware.js";
+import userRouter from "./routes/user.route.js";
 import { producer } from "./utils/kafka.js";
 
 const app = express();
@@ -26,16 +26,16 @@ app.get('/health', (req: Request, res: Response) => {
 app.use('/users', shouldBeAdmin, userRouter);
 
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    console.log(err);
-    return res.status(err.status || 500).json({ message: err.message || "internal server error" });
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+    console.log(error);
+    return res.status(error.status || 500).json({ message: error.errors[0].message || "internal server error", status: error.status });
 });
 
 const start = async () => {
     try {
         await producer.connect();
         app.listen(port, () => {
-            console.log("product-service running on: http://localhost:8003");
+            console.log("auth-service running on: http://localhost:8003");
         });
     } catch (error) {
         console.log(error);

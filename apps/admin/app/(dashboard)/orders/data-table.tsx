@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-table"
 
 import { DataTablePagination } from "@/components/DataTablePagination"
+import { Button } from "@/components/ui/button"
 import {
     Table,
     TableBody,
@@ -19,9 +20,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import React from "react"
-import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
+import React from "react"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
             {Object.keys(rowSelection).length > 0 && <div className="flex justify-end">
                 <Button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm m-4 cursor-pointer">
                     <Trash2 />
-                    Delete User(s)
+                    Delete Payment(s)
                 </Button>
             </div>}
             <Table>

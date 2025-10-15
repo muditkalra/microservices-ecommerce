@@ -11,7 +11,7 @@ declare global {
 }
 
 export const shouldBeUser = (req: Request, res: Response, next: NextFunction) => {
-    const auth = getAuth(req)
+    const auth = getAuth(req);
     const userId = auth.userId;
 
     if (!userId) {
@@ -29,7 +29,7 @@ export const shouldBeAdmin = (req: Request, res: Response, next: NextFunction) =
         return res.status(401).json({ message: 'You are not logged in' });
     }
 
-    const claims = sessionClaims.metadata as CustomJwtSessionClaims
+    const claims = sessionClaims as CustomJwtSessionClaims
 
     if (claims.metadata?.role !== "admin") {
         return res.status(401).json({ message: 'Unauthorized' });

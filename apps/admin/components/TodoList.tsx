@@ -1,14 +1,14 @@
 "use client";
 
-import React from 'react'
-import { ScrollArea } from './ui/scroll-area'
-import { Card } from './ui/card'
-import { Checkbox } from './ui/checkbox'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { Button } from './ui/button';
-import { CalendarIcon } from 'lucide-react';
 import { formatDate } from "date-fns";
+import { CalendarIcon } from 'lucide-react';
+import React from 'react';
+import { Button } from './ui/button';
 import { Calendar } from './ui/calendar';
+import { Card } from './ui/card';
+import { Checkbox } from './ui/checkbox';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { ScrollArea } from './ui/scroll-area';
 
 export default function TodoList() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
