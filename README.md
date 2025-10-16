@@ -1,4 +1,4 @@
-# 🛍️ Bazaar — Polyglot Microservices E-Commerce Platform
+# 🛍️ Bazaar — Polyglot Microservices Based E-Commerce Platform
 
 <p align="center">
   <img src="https://img.shields.io/badge/Built%20With-Turborepo-blue?logo=turborepo" />
@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white" />
   <img src="https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white" />
   <img src="https://img.shields.io/badge/Stripe-008CDD?logo=stripe&logoColor=white" />
-  <img src="https://img.shields.io/badge/Clerk-6C47FF?logo=clerk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Clerk-000000?logo=clerk&logoColor=white" />
 </p>
 
 ---
@@ -25,24 +25,21 @@ It demonstrates **real-world distributed architecture** — event-driven communi
 
 ---
 
-## 🧩 Architecture Overview
+<!-- ## 🧩 Architecture Overview
 
 <p align="center">
   <img src="docs/bazaar-architecture.png" alt="Bazaar Architecture Diagram" width="900"/>
-</p>
+</p> -->
 
-<details>
-<summary>📘 Text Diagram (Click to expand)</summary>
+<!-- <details> -->
+### 📘 API Flow
+
 
 ```
                         ┌────────────────────┐
                         │     Web (Next.js)  │
                         └─────────┬──────────┘
                                   │
-                                  ▼
-                        ┌────────────────────┐
-                        │  API Gateway (todo)│
-                        └─────────┬──────────┘
        ┌──────────────────────────┼───────────────────────────┐
        ▼                          ▼                           ▼
 ┌──────────────┐          ┌──────────────┐            ┌────────────────┐
@@ -64,7 +61,7 @@ It demonstrates **real-world distributed architecture** — event-driven communi
 │ Auth Svc     │──Clerk API──▶ User Authentication
 └──────────────┘
 ```
-</details>
+<!-- </details> -->
 
 ---
 
@@ -138,13 +135,14 @@ bazaar/
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/bazaar.git
-cd bazaar
+git clone https://github.com/muditkalra/microservices-ecommerce.git
+cd microservices-ecommerce
 
 # Install dependencies
 pnpm install
 
-# Start Kafka and databases (via Docker Compose)
+# Start Kafka  (via Docker Compose)
+cd packages/kafka
 docker compose up -d
 
 # Run a specific service (example: product-service)
