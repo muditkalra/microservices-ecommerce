@@ -14,8 +14,10 @@ const start = async () => {
 
         const orderCreatedHandler = async (message: any) => {
             const { email, amount, status } = message.value;
+            console.log("sending email to user:", email);
             await sendMail({ email, text: `Hello! Your order: Amount: ${amount}, Status:${status}`, subject: "Order has been created" });
         }
+        consumer.connect();
         consumer.subscribe([{ topicName: "user.created", handler: userCreatedHandler }, { topicName: "order.created", handler: orderCreatedHandler }]);
     } catch (error) {
         console.log(error);

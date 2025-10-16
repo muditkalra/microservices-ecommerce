@@ -2,33 +2,13 @@ import ProductInteraction from "@/components/ProductInteraction";
 import { ProductType } from "@repo/types";
 import Image from "next/image";
 
-
-// const product: ProductType = {
-//     id: 1,
-//     name: "Adidas CoreFit T-Shirt",
-//     shortDescription:
-//         "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-//     description:
-//         "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
-//     price: 59.9,
-//     sizes: ["xs", "s", "m", "l", "xl"],
-//     colors: ["gray", "purple", "green"],
-//     images: {
-//         gray: "/products/1g.png",
-//         purple: "/products/1p.png",
-//         green: "/products/1gr.png",
-//     },
-// };
-
-
 const fetchProduct = async (id: string) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_UR}/products/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products/${id}`);
     const data: ProductType = await res.json();
     return data;
 }
 
 export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }) => {
-    //  get details from db
     const { id } = await params;
     const product = await fetchProduct(id);
     return {

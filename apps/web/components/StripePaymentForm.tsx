@@ -7,8 +7,8 @@ import { CheckoutProvider } from "@stripe/react-stripe-js/checkout";
 import { loadStripe } from '@stripe/stripe-js';
 import { useEffect, useState } from 'react';
 import CheckoutForm from './CheckoutForm';
-const stripe = loadStripe("pk_test_51SD3P9DozvEKnTBJ9FM3f3ujAe3pFQ55ep9JsHnnd03CdpJapBNKiGlbfVdvC9EfIMWcwYMSD5cjZjhyl5IvBY6A00goX6f27m");
 
+const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const fetchClientSecret = async (cart: CartItemsType, token: string) => {
     return fetch(

@@ -11,8 +11,8 @@ export default function Navbar() {
         <nav className='flex justify-between items-center border-b border-gray-200 pb-2 mb-4'>
             {/* Left */}
             <Link href="/" className='flex items-center gap-2'>
-                <Image src="/next.svg" alt='Logo' width={56} height={56} className='w-6 h-6 md:w-14 md:h-14' />
-                <p className=' hidden md:block font-medium tracking-wider'>Bazaar</p>
+                <Image src="/logo-dark.png" alt='Logo' width={100} height={100}  />
+                {/* <p className='hidden md:block font-medium tracking-wider'>Bazaar</p> */}
             </Link>
 
             {/* Right */}

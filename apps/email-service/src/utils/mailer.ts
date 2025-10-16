@@ -21,8 +21,9 @@ const sendMail = async ({ email, subject, text }: { email: string, subject: stri
             subject,
             text
         });
+        console.log(res);
         if (res.rejected) {
-            throw new Error("email rejected");
+            throw new Error("email rejected ");
         }
         console.log("Email sent: to", email);
     } catch (error) {

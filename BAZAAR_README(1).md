@@ -94,33 +94,33 @@ bazaar/
 
 ## ⚙️ Services Overview
 
-| Service               | Framework           | Database                | Description                                                     |
-| --------------------- | ------------------- | ----------------------- | --------------------------------------------------------------- |
-| 🛒 **Product Service** | Express             | PostgreSQL (via Prisma) | Manages products, CRUD ops, and publishes Kafka events          |
-| 📦 **Order Service**   | Fastify             | MongoDB (via Mongoose)  | Handles order creation/retrieval, consumes & emits Kafka events |
-| 💳 **Payment Service** | Hono                | —                       | Integrates with Stripe APIs and webhooks for payment flow       |
-| 👤 **Auth Service**    | Express             | Clerk                   | Manages user retrieval and authentication                       |
-| ✉️ **Email Service**   | Node (Kafka Worker) | —                       | Subscribes to `user.created` & `order.created` for emails       |
+| Service | Framework | Database | Description |
+|----------|------------|-----------|--------------|
+| 🛒 **Product Service** | Express | PostgreSQL (via Prisma) | Manages products, CRUD ops, and publishes Kafka events |
+| 📦 **Order Service** | Fastify | MongoDB (via Mongoose) | Handles order creation/retrieval, consumes & emits Kafka events |
+| 💳 **Payment Service** | Hono | — | Integrates with Stripe APIs and webhooks for payment flow |
+| 👤 **Auth Service** | Express | Clerk | Manages user retrieval and authentication |
+| ✉️ **Email Service** | Node (Kafka Worker) | — | Subscribes to `user.created` & `order.created` for emails |
 
 ---
 
 ## 🌍 Frontend Applications
 
-| App               | Framework | Purpose                                               |
-| ----------------- | --------- | ----------------------------------------------------- |
-| 🏪 **Web App**     | Next.js   | Customer-facing storefront (products, checkout, etc.) |
-| 🧑‍💼 **Admin Panel** | Next.js   | Dashboard to manage products, orders, and payments    |
+| App | Framework | Purpose |
+|------|------------|----------|
+| 🏪 **Web App** | Next.js | Customer-facing storefront (products, checkout, etc.) |
+| 🧑‍💼 **Admin Panel** | Next.js | Dashboard to manage products, orders, and payments |
 
 ---
 
 ## 📦 Shared Packages
 
-| Package          | Purpose                                     |
-| ---------------- | ------------------------------------------- |
-| 🧭 **kafka**      | Central Kafka setup and utilities           |
+| Package | Purpose |
+|----------|----------|
+| 🧭 **kafka** | Central Kafka setup and utilities |
 | 🧩 **product-db** | Prisma + NeonDB connection for product data |
-| 🧱 **order-db**   | MongoDB connection and Mongoose models      |
-| 🧾 **types**      | Shared TypeScript types between services    |
+| 🧱 **order-db** | MongoDB connection and Mongoose models |
+| 🧾 **types** | Shared TypeScript types between services |
 
 ---
 
@@ -178,17 +178,17 @@ For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io
 
 ## ⚙️ Tech Stack Summary
 
-| Layer               | Technologies                                    |
-| ------------------- | ----------------------------------------------- |
-| **Frontend**        | Next.js (App Router, TypeScript)                |
-| **Backend**         | Express, Fastify, Hono                          |
-| **Databases**       | PostgreSQL (Prisma), MongoDB (Mongoose), NeonDB |
-| **Auth**            | Clerk                                           |
-| **Payments**        | Stripe                                          |
-| **Messaging**       | Kafka                                           |
-| **Repo Management** | Turborepo + PNPM                                |
-| **Language**        | TypeScript                                      |
-| **Infrastructure**  | Docker Compose, optional Kubernetes             |
+| Layer | Technologies |
+|--------|---------------|
+| **Frontend** | Next.js (App Router, TypeScript) |
+| **Backend** | Express, Fastify, Hono |
+| **Databases** | PostgreSQL (Prisma), MongoDB (Mongoose), NeonDB |
+| **Auth** | Clerk |
+| **Payments** | Stripe |
+| **Messaging** | Kafka |
+| **Repo Management** | Turborepo + PNPM |
+| **Language** | TypeScript |
+| **Infrastructure** | Docker Compose, optional Kubernetes |
 
 ---
 

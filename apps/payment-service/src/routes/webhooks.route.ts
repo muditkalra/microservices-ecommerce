@@ -7,7 +7,6 @@ const webhookRoute = new Hono();
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
 
 webhookRoute.post("/stripe", async (c) => {
-    console.log("inside webhook");
     const body = await c.req.text();
     const sig = c.req.header("stripe-signature");
 
@@ -15,7 +14,6 @@ webhookRoute.post("/stripe", async (c) => {
 
     try {
         event = stripe.webhooks.constructEvent(body, sig!, webhookSecret);
-        console.log(event, "webhook event in payment service");
     } catch (error) {
         console.log("webhook verification failed");
         return c.json({ error: "webhook verification failed" }, 400);
@@ -25,10 +23,8 @@ webhookRoute.post("/stripe", async (c) => {
         case "checkout.session.completed":
             const session = event.data.object as Stripe.Checkout.Session;
             const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
-
-            console.log("webhook triggered", lineItems);
             
-            // will proceed to order creation;
+            // will proceed to order creation using kafka;
             producer.send("payment.successful", {
                 value: {
                     userId: session.client_reference_id,

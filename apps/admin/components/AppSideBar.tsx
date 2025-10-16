@@ -1,10 +1,10 @@
 import { Calendar, ChevronUp, Home, Inbox, LucideIcon, Plus, Search, Settings, Shirt, ShoppingBasket, User, User2 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import AddCategory from './AddCategory';
 import AddOrder from './AddOrder';
 import AddProduct from './AddProduct';
 import AddUser from './AddUser';
+import Logo from './Logo';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Sheet, SheetTrigger } from './ui/sheet';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarSeparator } from './ui/sidebar';
@@ -51,8 +51,9 @@ export default function AppSideBar() {
 					<SidebarMenuItem >
 						<SidebarMenuButton asChild>
 							<Link href={"/"}>
-								<Image src="/globe.svg" alt='logo' width={20} height={20} />
-								<span>Bazaar</span>
+								<Logo size={110} />
+								{/* <Image src="/logo3.png" alt='logo' width={100} height={100} /> */}
+								{/* <span>Bazaar</span> */}
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>

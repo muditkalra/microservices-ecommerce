@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
+import Head from "next/head";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "E-commerce App",
+  title: "Bazaar | Shopping App",
   description: "Created by Mudit kalra",
 };
 
@@ -28,6 +29,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+        </head>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <div className="mx-auto p-2 sm:p-0 sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-6xl">
             <Navbar />

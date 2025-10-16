@@ -8,6 +8,7 @@ import { auth } from "@clerk/nextjs/server";
 export default async function Home() {
 	const { getToken } = await auth();
 	const token = await getToken();
+	console.log(process.env.NEXT_PUBLIC_ORDER_SERVICE_URL, "ordr url");
 	const orderChartData = fetch(`${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/order-chart`, {
 		headers: {
 			Authorization: `Bearer ${token}`

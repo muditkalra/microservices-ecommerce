@@ -6,7 +6,7 @@ import { shouldBeAdmin, shouldBeUser } from "../middleware/authMiddleware";
 
 export const orderRoute = async (fastify: FastifyInstance) => {
     fastify.get("/user-orders", { preHandler: shouldBeUser }, async (req, reply) => {
-        const order = await Order.find({ userId: req.userId });
+        const order = await Order.find({ userId: req.userId }).sort({ createdAt: -1 });
         return reply.send(order);
     });
 
@@ -17,6 +17,7 @@ export const orderRoute = async (fastify: FastifyInstance) => {
     });
 
     fastify.get("/order-chart", { preHandler: shouldBeAdmin }, async (req, reply) => {
+        console.log("inside chart route");
         const now = new Date();
         const sixMonthsAgo = startOfMonth(subMonths(now, 5));
 
@@ -72,21 +73,23 @@ export const orderRoute = async (fastify: FastifyInstance) => {
             "December",
         ];
 
-        const result: OrderChartType[] = [];
+        const results: OrderChartType[] = [];
 
         for (let i = 5; i >= 0; i--) {
             const d = subMonths(now, i);
             const year = d.getFullYear();
             const month = d.getMonth() + 1;
 
-            const match = raw.find((item) => item.year == year && item.month == month);
+            const match = raw.find(
+                (item) => item.year === year && item.month === month
+            );
 
-            result.push({
-                month: monthNames[match.month - 1] as string,
+            results.push({
+                month: monthNames[month - 1] as string,
+                total: match ? match.total : 0,
                 successful: match ? match.successful : 0,
-                total: match ? match.total : 0
-            })
+            });
         }
-        return reply.send(result);
+        return reply.send(results);
     })
 }

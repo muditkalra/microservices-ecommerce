@@ -14,7 +14,6 @@ const fetchData = async ({ category, sort, search, params }: { category?: string
 export default async function ProductList({ category, sort, search, params }: { category: string, sort?: string; search?: string; params: "homepage" | "productpage" }) {
 
     const products = await fetchData({ category, sort, search, params });
-    console.log(products);
 
     return (
         <div className='w-full'>

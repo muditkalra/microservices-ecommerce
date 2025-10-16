@@ -33,7 +33,6 @@ sessionRoute.post('/create-checkout-session', shouldBeUser, async (c) => {
             // The URL of your payment completion page
             return_url: 'http://localhost:3000/return?session_id={CHECKOUT_SESSION_ID}' // for frontend client
         });
-        console.log("payment service: stripe session created and return on localhost:3000");
         return c.json({ checkoutSessionClientSecret: session.client_secret });
     } catch (error) {
         console.log(error, "errror from payment");

@@ -60,7 +60,7 @@ export const columns: ColumnDef<OrderType>[] = [
             const formatted = new Intl.NumberFormat("en-IN", {
                 style: "currency",
                 currency: "INR",
-            }).format(amount / 100);
+            }).format(amount);
 
             return <div className="text-right font-medium">{formatted}</div>
         },
