@@ -32,7 +32,7 @@ It demonstrates **real-world distributed architecture** — event-driven communi
 </p> -->
 
 <!-- <details> -->
-### 📘 API Flow
+### 📘 Data Flow
 
 
 ```

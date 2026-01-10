@@ -15,7 +15,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { SheetContent, SheetDescription, SheetHeader, SheetTitle } from './ui/sheet';
 import { Textarea } from "./ui/textarea";
 
-
 // temporary category
 // const categories = [
 //     "T-shirts",
@@ -26,7 +25,6 @@ import { Textarea } from "./ui/textarea";
 //     "Jackets",
 //     "Gloves",
 // ] as const;
-
 
 const fetchCategories = async () => {
     const res = await fetch(
@@ -60,7 +58,6 @@ export default function AddProduct() {
         queryKey: ["categories"],
         queryFn: fetchCategories,
     });
-    
 
     const { getToken } = useAuth();
 

@@ -47,7 +47,7 @@ export default function AppSideBar() {
 	return (
 		<Sidebar collapsible='icon'>
 			<SidebarHeader className="py-4">
-				<SidebarMenu >
+				<SidebarMenu>
 					<SidebarMenuItem >
 						<SidebarMenuButton asChild>
 							<Link href={"/"}>
