@@ -228,7 +228,6 @@ export default function AppSideBar() {
 									<span>Sign out</span>
 								</DropdownMenuItem>
 							</DropdownMenuContent>
-
 						</DropdownMenu>
 					</SidebarMenuItem>
 				</SidebarMenu>

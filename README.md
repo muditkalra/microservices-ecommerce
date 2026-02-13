@@ -14,7 +14,6 @@
   <img src="https://img.shields.io/badge/Clerk-000000?logo=clerk&logoColor=white" />
 </p>
 
----
 
 ## ⚡️ Overview
 
@@ -23,7 +22,6 @@ It demonstrates **real-world distributed architecture** — event-driven communi
 
 > 🧠 The goal: showcase how different technologies (Express, Fastify, Hono, Next.js, Kafka, Stripe, Clerk, etc.) can cohesively form a **modular, scalable, event-driven e-commerce system**.
 
----
 
 <!-- ## 🧩 Architecture Overview
 
@@ -32,7 +30,7 @@ It demonstrates **real-world distributed architecture** — event-driven communi
 </p> -->
 
 <!-- <details> -->
-### 📘 Data Flow
+## 📘 Data Flow
 
 
 ```
@@ -63,7 +61,6 @@ It demonstrates **real-world distributed architecture** — event-driven communi
 ```
 <!-- </details> -->
 
----
 
 ## 🧱 Project Structure
 
@@ -87,7 +84,6 @@ bazaar/
 └── turbo.json
 ```
 
----
 
 ## ⚙️ Services Overview
 
@@ -99,7 +95,6 @@ bazaar/
 | 👤 **Auth Service**    | Express             | Clerk                   | Manages user retrieval and authentication                       |
 | ✉️ **Email Service**   | Node (Kafka Worker) | —                       | Subscribes to `user.created` & `order.created` for emails       |
 
----
 
 ## 🌍 Frontend Applications
 
@@ -108,7 +103,6 @@ bazaar/
 | 🏪 **Web App**     | Next.js   | Customer-facing storefront (products, checkout, etc.) |
 | 🧑‍💼 **Admin Panel** | Next.js   | Dashboard to manage products, orders, and payments    |
 
----
 
 ## 📦 Shared Packages
 
@@ -119,7 +113,6 @@ bazaar/
 | 🧱 **order-db**   | MongoDB connection and Mongoose models      |
 | 🧾 **types**      | Shared TypeScript types between services    |
 
----
 
 ## 🧠 Design Philosophy
 
@@ -129,7 +122,6 @@ bazaar/
 - 🔒 **Decoupled Auth:** Clerk ensures secure authentication across apps.
 - 💳 **Modern Payments:** Stripe webhook for `checkout.session.completed` event.
 
----
 
 ## 🧰 Local Development
 
@@ -154,14 +146,12 @@ pnpm run dev
 
 > ⚠️ Configure `.env` files for each app (Stripe, Clerk, databases, etc.) before running.
 
----
 
-## 🐳 Docker & Deployment
+## 🐳 Docker & Deployment ( WIP )
 
 Each service can be containerized using its Dockerfile and orchestrated via `docker-compose.yml`.
-For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io** deployments.
+<!-- For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io** deployments. -->
 
----
 
 ## 📈 Future Roadmap
 
@@ -172,7 +162,6 @@ For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io
 - [ ] CI/CD with GitHub Actions
 - [ ] Background worker optimizations
 
----
 
 ## ⚙️ Tech Stack Summary
 
@@ -186,9 +175,8 @@ For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io
 | **Messaging**       | Kafka                                           |
 | **Repo Management** | Turborepo + PNPM                                |
 | **Language**        | TypeScript                                      |
-| **Infrastructure**  | Docker Compose, optional Kubernetes             |
+| **Infrastructure**  | Docker Compose (WIP)                            |
 
----
 
 ## 💡 Key Learnings Showcased
 
@@ -198,7 +186,6 @@ For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io
 ✅ Seamless **third-party API integration** (Stripe, Clerk)  
 ✅ **Event-driven flow** with async reliability
 
----
 
 ## 👨‍💻 Author
 
@@ -206,7 +193,6 @@ For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io
 Fullstack & Systems Design Enthusiast  
 Building scalable distributed systems with Node.js, Kafka, and Next.js
 
----
 
 ## 🌟 Project Status
 
