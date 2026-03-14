@@ -6,7 +6,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
 	const category = (await searchParams).category;
 	return (
 		<div className="">
-			<div className="relative aspect-[3/1] mb-8">
+			<div className="relative aspect-3/1 mb-8">
 				<Image src="/featured.png" alt="Featured Product" fill />
 			</div>
 			<ProductList category={category} params="homepage" />
