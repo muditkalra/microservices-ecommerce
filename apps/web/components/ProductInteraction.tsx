@@ -46,7 +46,7 @@ export default function ProductInteraction({ product, selectedSize, selectedColo
                     Sizes
                 </span>
                 <div className="flex items-center gap-2">
-                    {product.sizes.map((size) => (
+                    {product.sizes.map((size:string) => (
                         <div className={`cursor-pointer border-1 p-[2px] ${selectedSize == size ? "border-gray-600" : "border-gray-300"}`} onClick={() => handleTypeChange("size", size)} key={size}>
                             <div className={`w-6 h-6  text-center flex items-center justify-center ${selectedSize == size ? "text-white bg-black" : "text-black bg-white"} `} >{size.toUpperCase()}</div>
                         </div>
@@ -61,7 +61,7 @@ export default function ProductInteraction({ product, selectedSize, selectedColo
                     colors
                 </span>
                 <div className="flex items-center gap-2">
-                    {product.colors.map((color) => (
+                    {product.colors.map((color:string) => (
                         <div className={`cursor-pointer border-1 p-[2px] ${selectedColor == color ? "border-gray-300" : "border-white"}`} onClick={() => handleTypeChange("color", color)} key={color}>
                             <div key={color} style={{ backgroundColor: color }} className="w-6 h-6" />
                         </div>
