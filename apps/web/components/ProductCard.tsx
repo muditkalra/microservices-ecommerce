@@ -57,7 +57,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
 						<span className="text-gray-500">
 							<select name="size" id="size" className="ring ring-gray-300 rounded-md p-2 py-1" onChange={e => handleProductType({ type: "size", value: e.target.value })}>
 								{
-									product.sizes.map(size => (
+									product.sizes.map((size: string) => (
 										<option value={size} key={size}>{size.toUpperCase()}</option>
 									))
 								}
