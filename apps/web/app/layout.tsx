@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
+import { Suspense } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,9 +33,11 @@ export default function RootLayout({
         </head>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <div className="mx-auto p-2 sm:p-0 sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-6xl">
-            <Navbar />
-            {children}
-            <Footer />
+            <Suspense fallback={<div> Loading..</div>}>
+              <Navbar />
+              {children}
+              <Footer />
+            </Suspense>
           </div>
           <ToastContainer position="bottom-right" />
         </body>

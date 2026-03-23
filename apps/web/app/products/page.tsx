@@ -2,9 +2,7 @@ import ProductList from '@/components/ProductList';
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ category: string; sort: string; search: string }> }) {
 
-    const category = (await searchParams).category;
-    const search = (await searchParams).search;
-    const sort = (await searchParams).sort;
+    const { category, sort, search } = await searchParams
 
     return (
         <div>

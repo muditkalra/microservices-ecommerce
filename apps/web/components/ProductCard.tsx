@@ -69,7 +69,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
 						<span className="text-gray-500">
 						</span>
 						<div className="flex items-center gap-2">
-							{product.colors.map((color) => (
+							{product.colors.map((color:string) => (
 								<div className={cn(`cursor-pointer border-1 rounded-full p-0.5`, productTypes.color === color ? "border-gray-400" : "border-gray-200")} key={color} onClick={() => handleProductType({ type: "color", value: color })}>
 									<div className="w-[14px] h-[14px] rounded-full" style={{ backgroundColor: color }}></div>
 								</div>
