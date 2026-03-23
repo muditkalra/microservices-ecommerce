@@ -17,10 +17,11 @@
   "license": "ISC",
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^24.5.2",
-    "prisma": "^6.16.2"
+    "@types/node": "^24.5.2"
   },
   "dependencies": {
-    "@prisma/client": "^6.16.2"
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^6.16.2",
+    "prisma": "^7.5.0"
   }
 }
