@@ -1,5 +1,4 @@
 import ProductList from '@/components/ProductList';
-import React from 'react'
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ category: string; sort: string; search: string }> }) {
 
@@ -7,7 +6,6 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     const search = (await searchParams).search;
     const sort = (await searchParams).sort;
 
-    console.log({ category, search, sort });
     return (
         <div>
             <ProductList category={category} params='productpage' search={search} sort={sort} />

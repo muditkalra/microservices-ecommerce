@@ -13,7 +13,7 @@ export default function PaymentForm() {
 	})
 	const router = useRouter();
 
-	const handlePaymentForm: SubmitHandler<PaymentFormInputs> = (data) => {
+	const handlePaymentForm: SubmitHandler<PaymentFormInputs> = () => {
 		router.push("/cart?step=3", { scroll: false });
 	}
 

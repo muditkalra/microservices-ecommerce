@@ -1,6 +1,5 @@
 import ProductInteraction from "@/components/ProductInteraction";
 import { products } from "@/utils/product";
-import { ProductType } from "@repo/types";
 import Image from "next/image";
 
 // const fetchProduct = async (id: string) => {

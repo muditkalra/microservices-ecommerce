@@ -36,8 +36,8 @@ export default function StripePaymentForm({ shippingForm }: { shippingForm: Ship
     const { getToken } = useAuth();
 
     useEffect(() => {
-        getToken().then((token) => setToken(token));
-    }, []);
+        getToken().then((t) => setToken(t));
+    }, [getToken]);
 
     if (!token) {
         return <div className="">Loading...</div>;

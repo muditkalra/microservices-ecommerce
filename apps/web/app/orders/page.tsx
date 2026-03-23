@@ -1,5 +1,3 @@
-import { auth } from "@clerk/nextjs/server"
-import { OrderType } from "@repo/types";
 
 // const fetchOrders = async () => {
 //     const { getToken } = await auth();

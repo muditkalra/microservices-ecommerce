@@ -1,12 +1,11 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { baseMetadata } from "@/utils/metadata";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
-import Head from "next/head";
-import { baseMetadata } from "@/utils/metadata";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

@@ -70,7 +70,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
 						</span>
 						<div className="flex items-center gap-2">
 							{product.colors.map((color) => (
-								<div className={cn(`cursor-pointer border-1 rounded-full p-0.5`, productTypes.color === color ? "border-gray-400" : "border-gray-200")} key={color} onClick={(e) => handleProductType({ type: "color", value: color })}>
+								<div className={cn(`cursor-pointer border-1 rounded-full p-0.5`, productTypes.color === color ? "border-gray-400" : "border-gray-200")} key={color} onClick={() => handleProductType({ type: "color", value: color })}>
 									<div className="w-[14px] h-[14px] rounded-full" style={{ backgroundColor: color }}></div>
 								</div>
 							))}
@@ -80,7 +80,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
 				{/* Price and add to cart */}
 
 				<div className="flex items-center justify-between">
-					<p>Rs. {(product.price*1e2).toFixed(2)}</p>
+					<p>Rs. {(product.price * 1e2).toFixed(2)}</p>
 					<button onClick={handleAddToCart} className="ring-1 ring-gray-200 shadow-lg rounded-md px-2 py-1 text-sm cursor-pointer hover:text-white hover:bg-black transition-all duration-300 flex items-center  gap-2">
 						<ShoppingCart className="w-4 h-4" />
 						Add to Cart

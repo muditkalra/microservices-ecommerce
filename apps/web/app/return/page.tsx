@@ -1,6 +1,4 @@
 import OrderSuccessful from '@/components/OrderSuccessful';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
 export default async function ReturnPage({ searchParams }: { searchParams: Promise<{ session_id: string }> | undefined }) {
 
@@ -18,6 +16,6 @@ export default async function ReturnPage({ searchParams }: { searchParams: Promi
 	const data = await res.json();
 
 	return (
-		<OrderSuccessful data={data}/>
+		<OrderSuccessful data={data} />
 	);
 }
