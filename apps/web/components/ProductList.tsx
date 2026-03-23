@@ -3,24 +3,26 @@ import Categories from './Categories';
 import ProductCard from './ProductCard';
 import Link from "next/link";
 import Filter from "./Filter";
+import { products } from "@/utils/product";
 
-const fetchData = async ({ category, sort, search, params }: { category?: string; sort?: string; search?: string; params: "homepage" | "productpage" }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products?${category ? `category=${category}` : ""}${search ? `&search=${search}` : ""}&sort=${sort || "newest"}${params === "homepage" ? "&limit=8" : ""}`)
+// const fetchData = async ({ category, sort, search, params }: { category?: string; sort?: string; search?: string; params: "homepage" | "productpage" }) => {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products?${category ? `category=${category}` : ""}${search ? `&search=${search}` : ""}&sort=${sort || "newest"}${params === "homepage" ? "&limit=8" : ""}`)
 
-    const data: ProductType[] = await res.json();
-    return data
-}
+//     const data: ProductType[] = await res.json();
+//     return data
+// }
+
 
 export default async function ProductList({ category, sort, search, params }: { category: string, sort?: string; search?: string; params: "homepage" | "productpage" }) {
 
-    const products = await fetchData({ category, sort, search, params });
-
+    // const products = await fetchData({ category, sort, search, params });
+    
     return (
         <div className='w-full'>
             <Categories />
             {params === "productpage" && <Filter />}
             <div className="grid grid-col-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
-                {products.map((product, index) => (
+                {products.filter((product) => category ? product.categorySlug == category : true).map((product, index) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>

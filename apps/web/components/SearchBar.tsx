@@ -12,7 +12,7 @@ export default function SearchBar() {
     const handleSearch = (value: string) => {
         const params = new URLSearchParams(searchParam);
         params.set("search", value);
-        router.push(`/products/${params.toString()}`, { scroll: false });
+        router.push(`/products?${params.toString()}`, { scroll: false });
     }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {

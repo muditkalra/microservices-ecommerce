@@ -1,22 +1,56 @@
 import { auth } from "@clerk/nextjs/server"
 import { OrderType } from "@repo/types";
 
-const fetchOrders = async () => {
-    const { getToken } = await auth();
-    const token = await getToken();
+// const fetchOrders = async () => {
+//     const { getToken } = await auth();
+//     const token = await getToken();
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/user-orders`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-    const data: OrderType[] = await res.json();
-    return data;
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/user-orders`, {
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         }
+//     });
+//     const data: OrderType[] = await res.json();
+//     return data;
 
-}
+// }
+
+const orders = [
+    {
+        _id: Math.floor(Math.random() * 1e9).toString(),
+        amount: 127,
+        email: "user1@gmail.com",
+        products: [{ _id: Math.random.toString(), name: "t-shirt", quantity: 2, price: 134 }],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        status: "success",
+        userId: Math.random().toString()
+    },
+    {
+        _id: Math.floor(Math.random() * 1e9).toString(),
+        amount: 127,
+        email: "user2@gmail.com",
+        products: [{ _id: Math.random.toString(), name: "t-shirt", quantity: 2, price: 134 }],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        status: "success",
+        userId: Math.random().toString()
+    },
+    {
+        _id: Math.floor(Math.random() * 1e9).toString(),
+        amount: 127,
+        email: "user3@gmail.com",
+        products: [{ _id: Math.random.toString(), name: "t-shirt", quantity: 2, price: 134 }],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        status: "failed",
+        userId: Math.random().toString()
+    }
+]
+
 
 export default async function OrdersPage() {
-    const orders = await fetchOrders();
+    // const orders = await fetchOrders();
 
     if (!orders) {
         return <div className="">No Orders Found !</div>

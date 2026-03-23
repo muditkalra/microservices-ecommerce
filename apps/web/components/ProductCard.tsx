@@ -80,7 +80,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
 				{/* Price and add to cart */}
 
 				<div className="flex items-center justify-between">
-					<p>{product.price.toFixed(2)}</p>
+					<p>Rs. {(product.price*1e2).toFixed(2)}</p>
 					<button onClick={handleAddToCart} className="ring-1 ring-gray-200 shadow-lg rounded-md px-2 py-1 text-sm cursor-pointer hover:text-white hover:bg-black transition-all duration-300 flex items-center  gap-2">
 						<ShoppingCart className="w-4 h-4" />
 						Add to Cart

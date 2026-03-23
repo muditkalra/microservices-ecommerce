@@ -28,6 +28,11 @@ const categories = [
 		slug: "shoes",
 	},
 	{
+		name: "Hoodies",
+		icon: <Shirt className="w-4 h-4" />,
+		slug: "hoodies",
+	},
+	{
 		name: "Accessories",
 		icon: <Glasses className="w-4 h-4" />,
 		slug: "accessories",
@@ -41,11 +46,6 @@ const categories = [
 		name: "Dresses",
 		icon: <Venus className="w-4 h-4" />,
 		slug: "dresses",
-	},
-	{
-		name: "Jackets",
-		icon: <Shirt className="w-4 h-4" />,
-		slug: "jackets",
 	},
 	{
 		name: "Gloves",

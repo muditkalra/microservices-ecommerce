@@ -147,10 +147,7 @@ pnpm run dev
 > ⚠️ Configure `.env` files for each app (Stripe, Clerk, databases, etc.) before running.
 
 
-## 🐳 Docker & Deployment ( WIP )
 
-Each service can be containerized using its Dockerfile and orchestrated via `docker-compose.yml`.
-<!-- For production, the system is ready for **Kubernetes**, **AWS ECS**, or **Fly.io** deployments. -->
 
 
 ## 📈 Future Roadmap
